@@ -18,7 +18,7 @@ public class NamesKeyWordsMatcher implements KeyWordsMatcher {
         final LinkedMultiValueMap<String, TextEntry> stringTextEntryLinkedMultiValueMap = new LinkedMultiValueMap<>();
         for (int i = 0; i < lines.size(); i++) {
             final Matcher matcher = pattern.matcher(lines.get(i));
-            if (matcher.find()) {
+            while (matcher.find()) {
                 final int charOffset = matcher.start();
                 final String keyWord = normalize(matcher.group());
                 stringTextEntryLinkedMultiValueMap.add(keyWord, new TextEntry( lineOffset + i + 1, charOffset + 1));

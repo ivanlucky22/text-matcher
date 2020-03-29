@@ -38,6 +38,13 @@ class TextSearchingServiceTest {
     }
 
     @Test
+    void testJohnIsFoundTwiceInOneLine() {
+        final MultiValueMap<String, TextEntry> resultMap = textSearchingService.findKeyWords(getFile("john21.txt"), Arrays.asList(JOHN));
+        assertNotNull(resultMap.get(JOHN));
+        assertEquals(2, resultMap.get(JOHN).size());
+    }
+
+    @Test
     void testJohnIsNotFound() {
         final MultiValueMap<String, TextEntry> resultMap = textSearchingService.findKeyWords(getFile("john0.txt"), Arrays.asList(JOHN));
         assertNull(resultMap.get(JOHN));
@@ -50,8 +57,8 @@ class TextSearchingServiceTest {
                 "Larry,Jeffrey,Frank,Scott,Eric,Stephen,Andrew,Raymond,Gregory,Joshua,Jerry,Dennis,Walter,Patrick,Peter,Harold," +
                 "Douglas,Henry,Carl,Arthur,Ryan,Roger").split(",");
         final MultiValueMap<String, TextEntry> resultMap = textSearchingService.findKeyWords(getFile("big.txt"), Arrays.asList(split));
-        assertEquals(153, resultMap.get(JOHN).size());
-        assertEquals(7, resultMap.get("Patrick").size());
+        assertEquals(173, resultMap.get(JOHN).size());
+        assertEquals(10, resultMap.get("Patrick").size());
         assertEquals(1, resultMap.get("Larry").size());
         assertEquals(3, resultMap.get("Christopher").size());
     }
